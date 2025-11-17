@@ -8,5 +8,5 @@ export function GoogleComponent (){
 
 
 async function render(element) {
-    element.src ='../img/icons/googleIcon.svg'
+    element.src ='../../../img/icons/googleIcon.svg'
 }
