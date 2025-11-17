@@ -7,7 +7,7 @@ import { SettingsComponent } from "./Settings/Settings.components.js";
 import { StartComponent } from "./Start/Start.component.js";
 
 export function AppComponent(){
-    const localState = {prevGameStatus:null}
+    const localState = {prevGameStatus:null, cleanupFunction:[]}
     const element = document.createElement('div');
 
     subcribe(() =>{
@@ -21,12 +21,14 @@ export function AppComponent(){
 }
 
 async function render(element, localState) {
-    
+
     const gameStatus = await getGameStatus()
 
     if(localState.prevGameStatus === gameStatus) return;
     localState.prevGameStatus = gameStatus;
     
+    // localState.cleanupFunction.forEach(cf =>cf())
+    localState.cleanupFunction =[]
 
     element.innerHTML=''
     switch(gameStatus){
@@ -39,7 +41,9 @@ async function render(element, localState) {
         case GAME_STATUSES.IN_PROGRESS:{
             const settingsComponent =  SettingsComponent();
             const resultPanelComponent = ResultPanelComponent();
+            localState.cleanupFunction.push(resultPanelComponent.cleanup)
             const gridComponent = GridComponent()
+            localState.cleanupFunction.push(gridComponent.cleanup)
             element.append(settingsComponent.element,resultPanelComponent.element,gridComponent.element)
             break;
         }

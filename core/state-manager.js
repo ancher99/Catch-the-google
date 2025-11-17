@@ -36,7 +36,6 @@ export function subcribe(observer){
 
 export function unsubcribe(observer){
     _observers = _observers.filter(o => o!== observer)
-    console.log(_observers)
 }
 
 

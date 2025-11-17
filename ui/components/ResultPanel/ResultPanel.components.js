@@ -10,7 +10,7 @@ export function ResultPanelComponent(){
 
     render(element)
 
-    return {element};
+    return {element, cleanup:()=>{}};
 }
 
 
