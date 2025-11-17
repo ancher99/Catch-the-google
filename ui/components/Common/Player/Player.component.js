@@ -8,5 +8,5 @@ export function PlayerComponent (playerNumber){
 
 
 async function render(element,playerNumber) {
-    element.src=`../img/icons/man0${playerNumber}.svg`
+    element.src=`../../../../img/icons/man0${playerNumber}.svg`
 }
