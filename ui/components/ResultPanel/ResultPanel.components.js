@@ -1,16 +1,21 @@
-import { getGooglePoints, getPlayerPoints, subcribe } from "../../../core/state-manager.js";
+import { EVENTS } from "../../../core/constans.js";
+import { getGooglePoints, getPlayerPoints, subcribe, unsubcribe } from "../../../core/state-manager.js";
 
 
 export function ResultPanelComponent(){
     const element = document.createElement('div');
 
-    subcribe(()=>{
-        render(element)
-    })
+    const observer = (e) =>{
+        if(e.name === EVENTS.SCORES_CHANGED){
+    render(element)
+        }
+
+    }
+    subcribe(observer)
 
     render(element)
 
-    return {element, cleanup:()=>{}};
+    return {element, cleanup:()=>{unsubcribe(observer)}};
 }
 
 

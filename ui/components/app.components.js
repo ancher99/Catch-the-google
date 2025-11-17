@@ -27,7 +27,7 @@ async function render(element, localState) {
     if(localState.prevGameStatus === gameStatus) return;
     localState.prevGameStatus = gameStatus;
     
-    // localState.cleanupFunction.forEach(cf =>cf())
+    localState.cleanupFunction.forEach(cf =>cf())
     localState.cleanupFunction =[]
 
     element.innerHTML=''

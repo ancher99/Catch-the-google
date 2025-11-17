@@ -3,23 +3,21 @@ import { CellComponent } from "./Cell/Cell.components.js";
 
 
 export function GridComponent(){
+    const localState ={cleanupFunctions:[]}
     const element = document.createElement('table');
     element.classList.add('grid')
 
-    const observer = () =>{
-        render(element)
-    }
-    subcribe(observer)
+   render(element, localState)
 
-   render(element)
-
-    return {element, cleanup: () => {
-        unsubcribe(observer)}
+    return {element, cleanup: () => { localState.cleanupFunctions.forEach(cf =>cf())}
     };
 }
 
-async function render(element) {
-    console.log('grid render')
+async function render(element,localState) {
+    console.log('grid component render')
+
+    localState.cleanupFunctions.forEach(cf=>cf())
+    localState.cleanupFunctions=[]
     element.innerHTML='';
     const gridSizePromise = getGridSize()
     const gridSize = await gridSizePromise
@@ -29,6 +27,8 @@ async function render(element) {
 
         for (let x=0; x<gridSize.columnCount;x++){
             const cellComponent = CellComponent(x,y)
+            
+            localState.cleanupFunctions.push(cellComponent.cleanup)
             rowElement.append(cellComponent.element)
         }
         element.append(rowElement) 
