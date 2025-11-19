@@ -5,6 +5,7 @@ import { LoseComponent } from "./Lose/Lose.components.js";
 import { ResultPanelComponent } from "./ResultPanel/ResultPanel.components.js";
 import { SettingsComponent } from "./Settings/Settings.components.js";
 import { StartComponent } from "./Start/Start.component.js";
+import { WinComponent } from "./Win/Win.component.js";
 
 export function AppComponent(){
     const localState = {prevGameStatus:null, cleanupFunction:[]}
@@ -50,6 +51,11 @@ async function render(element, localState) {
         case GAME_STATUSES.LOSE:{
             const loseComponent = LoseComponent()
             element.append(loseComponent.element)
+            break;
+        }
+        case GAME_STATUSES.WIN:{
+            const winComponent = WinComponent()
+            element.append(winComponent.element)
             break;
         }
         default:

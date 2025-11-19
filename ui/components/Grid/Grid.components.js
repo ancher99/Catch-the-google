@@ -1,20 +1,40 @@
-import { getGridSize, subcribe, unsubcribe } from "../../../core/state-manager.js";
+import { MOVING_DIRECTIONS } from "../../../core/constans.js";
+import { getGridSize, movePlayer} from "../../../core/state-manager.js";
 import { CellComponent } from "./Cell/Cell.components.js";
 
 
 export function GridComponent(){
     const localState ={cleanupFunctions:[]}
+
+    const keyupObserver = (e) =>{
+        switch(e.code){
+            case 'ArrowUp': movePlayer(1, MOVING_DIRECTIONS.UP);break
+            case 'ArrowDown': movePlayer(1, MOVING_DIRECTIONS.DOWN);break
+            case 'ArrowLeft': movePlayer(1, MOVING_DIRECTIONS.LEFT);break
+            case 'ArrowRight': movePlayer(1, MOVING_DIRECTIONS.RIGHT);break
+
+            case 'KeyW': movePlayer(2, MOVING_DIRECTIONS.UP);break
+            case 'KeyS': movePlayer(2, MOVING_DIRECTIONS.DOWN);break
+            case 'KeyA': movePlayer(2, MOVING_DIRECTIONS.LEFT);break
+            case 'KeyD': movePlayer(2, MOVING_DIRECTIONS.RIGHT);break
+        }
+    }
+
+    document.addEventListener('keyup', keyupObserver)
+
     const element = document.createElement('table');
     element.classList.add('grid')
 
    render(element, localState)
 
-    return {element, cleanup: () => { localState.cleanupFunctions.forEach(cf =>cf())}
+    return {element, cleanup: () => { 
+        localState.cleanupFunctions.forEach(cf =>cf())
+        document.removeEventListener('keyup', keyupObserver)
+    }
     };
 }
 
 async function render(element,localState) {
-    console.log('grid component render')
 
     localState.cleanupFunctions.forEach(cf=>cf())
     localState.cleanupFunctions=[]
