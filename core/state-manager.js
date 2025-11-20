@@ -9,8 +9,8 @@ const _state = {
             rowsCount:2,
             columnCount:2
         },
-        pointsToLose:5,
-        pointsToWin:5,
+        pointsToLose:8,
+        pointsToWin:8,
     },
     positins:{
         google:{
@@ -112,7 +112,7 @@ function _catchGoogle(playerNumber){
 
     _state.points.players[playerIndex]++
     _notifyObservers(EVENTS.SCORES_CHANGED)
-
+    _notifyObservers(EVENTS.GOOGLE_CAUGHT)
 
     if (_state.points.players[playerIndex] === _state.settings.pointsToWin){
         _state.gameStatus = GAME_STATUSES.WIN
@@ -145,7 +145,7 @@ export async function start() {
     _state.points.players[1] = 0;
 
     const copyGoogleJumpInterval = _state.settings.googleJumpInterval
-    console.log(copyGoogleJumpInterval)
+    
     googleJumpInterval = setInterval(() =>{
         const oldPosition = {..._state.positins.google}
     _jumpGoogleToNewPosition()
@@ -153,6 +153,8 @@ export async function start() {
         oldPosition,
         newPosition:{..._state.positins.google}
     })
+    _notifyObservers(EVENTS.GOOGLE_RAN_AWAY)
+
     _state.points.google++
     _notifyObservers(EVENTS.SCORES_CHANGED)
     _state.settings.googleJumpInterval = copyGoogleJumpInterval

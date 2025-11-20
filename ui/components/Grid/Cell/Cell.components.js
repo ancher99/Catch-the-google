@@ -23,7 +23,6 @@ export function CellComponent (x,y){
     render(element, x, y, localState)
 
     return {element, cleanup: () => { 
-        console.log(`cleanup${x};${y}`)
         unsubcribe(observer)}}
 }
 
