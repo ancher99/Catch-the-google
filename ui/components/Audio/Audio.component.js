@@ -15,7 +15,6 @@ export function AudioComponent(){
           catchAudio.crossOrigin="anonymous"
           catchAudio.currentTime = 0;  
           catchAudio.play()
-          console.log(catchAudio)
         }
     })
 

@@ -57,10 +57,7 @@ select {
     gap: 8px;
 }
 
-/* .main-button {
-    margin: 0 auto;
-    margin-top: 288px;
-} */
+
 
 .toggle {
     width: 36px;
@@ -122,7 +119,7 @@ select {
     background-color: rgba(57, 61, 55, 0.40);
     margin: 36px auto;
     max-width: 376px;
-    min-width: 376px;
+    min-width: 850px;
     column-gap: 30px;
 }
 
@@ -130,6 +127,7 @@ select {
     display: inline-flex;
     gap: 24px;
     justify-content: space-between;
+    align-items: center
 }
 
 .result-title {

@@ -4,13 +4,13 @@ export function Line(title, valueElem, index){
     const element = document.createElement('div');
    
     render(element, title, valueElem, index)
-    console.log(element)
+    
     return element;
 }
 
 async function render(element, title, valueElem, index) {
     element.classList.add('line');
-    console.log(title, valueElem, index)
+    
     const label = document.createElement('label');
     label.innerText = title;
     label.setAttribute('for', `0${index + 1}`);
