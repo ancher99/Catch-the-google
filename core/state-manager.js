@@ -6,8 +6,8 @@ const _state = {
     settings:{
         googleJumpInterval:300000,
         gridSize:{
-            rowsCount:5,
-            columnCount:5
+            rowsCount:4,
+            columnCount:4
         },
         pointsToLose:5,
         pointsToWin:5,

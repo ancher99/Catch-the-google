@@ -1,8 +1,10 @@
 import { playAgain } from "../../../core/state-manager.js";
+import { ModalDecoration } from "./ModalDecoration/ModalDecoration.js";
+import { ModalElement } from "./ModalElement/ModalElement.js";
 
 export function WinComponent(){
     const element = document.createElement('div');
-
+    element.classList.add('modal')
     render(element);
 
     return {element};
@@ -10,13 +12,8 @@ export function WinComponent(){
 
 
 async function render(element) {
-    element.append('You win')
-
-
-    const button = document.createElement('button')
-    button.append('Play again')
-    button.addEventListener('click', () => {
-      playAgain()
-    })
-    element.append(button)
+    
+    element.append(
+      ModalDecoration(),
+      ModalElement())
 }

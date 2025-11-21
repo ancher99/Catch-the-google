@@ -44,12 +44,11 @@ async function render(element, localState) {
             break;
         }
         case GAME_STATUSES.IN_PROGRESS:{
-            const settingsComponent =  SettingsComponent();
             const resultPanelComponent = ResultPanelComponent();
             localState.cleanupFunction.push(resultPanelComponent.cleanup)
             const gridComponent = GridComponent()
             localState.cleanupFunction.push(gridComponent.cleanup)
-            element.append(settingsComponent.element,resultPanelComponent.element,gridComponent.element)
+            element.append(resultPanelComponent.element,gridComponent.element)
             break;
         }
         case GAME_STATUSES.LOSE:{

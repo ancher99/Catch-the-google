@@ -7,10 +7,14 @@ export function ResultBlock(text, data, id){
     spanTitle.innerText=text
 
     const img = document.createElement('img')
-    if(id ===0){
+    if(id === 0){
         img.src ='img/icons/googleIcon.svg'
-    }else{
+    }
+    if(id>0){
         img.src=`img/icons/man0${id}.svg`
+    }
+    if(id === undefined){
+        img.setAttribute('display', 'none')
     }
     
 
