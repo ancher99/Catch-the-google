@@ -4,13 +4,13 @@ import { EVENTS, GAME_STATUSES, MOVING_DIRECTIONS } from "./constans.js"
 const _state = {
     gameStatus:GAME_STATUSES.SETTINGS,
     settings:{
-        googleJumpInterval:5000,
+        googleJumpInterval:3000,
         gridSize:{
             rowsCount:2,
             columnCount:2
         },
-        pointsToLose:8,
-        pointsToWin:8,
+        pointsToLose:3,
+        pointsToWin:3,
     },
     positins:{
         google:{
@@ -120,11 +120,34 @@ function _catchGoogle(playerNumber){
         clearInterval(googleJumpInterval)
     } else{
         const oldPosition = _state.positins.google
+        const copyGoogleJumpInterval = _state.settings.googleJumpInterval
         _jumpGoogleToNewPosition()
+        
         _notifyObservers(EVENTS.GOOGLE_JUMPED, {
             oldPosition,
             newPosition: _state.positins.google
         })
+        clearInterval(googleJumpInterval);
+        googleJumpInterval = setInterval(() =>{
+        
+        const oldPosition = {..._state.positins.google}
+    _jumpGoogleToNewPosition()
+    _notifyObservers(EVENTS.GOOGLE_JUMPED, {
+        oldPosition,
+        newPosition:{..._state.positins.google}
+    })
+    _notifyObservers(EVENTS.GOOGLE_RAN_AWAY)
+
+    _state.points.google++
+    _notifyObservers(EVENTS.SCORES_CHANGED)
+    _state.settings.googleJumpInterval = copyGoogleJumpInterval
+    if(_state.points.google ===_state.settings.pointsToLose){
+        clearInterval(googleJumpInterval)
+        _state.gameStatus = GAME_STATUSES.LOSE
+        _notifyObservers(EVENTS.STATUS_CHANGED) 
+    }
+    
+},  _state.settings.googleJumpInterval)
     }
 }
 
@@ -132,6 +155,7 @@ function _catchGoogle(playerNumber){
 
 
 //COMMANDS
+
 
 export async function start() {
     if(_state.gameStatus !== GAME_STATUSES.SETTINGS) throw new Error(`Incoreect transition from ${_state.gameStatus} to ${GAME_STATUSES.IN_PROGRESS}`)
@@ -147,6 +171,7 @@ export async function start() {
     const copyGoogleJumpInterval = _state.settings.googleJumpInterval
     
     googleJumpInterval = setInterval(() =>{
+        
         const oldPosition = {..._state.positins.google}
     _jumpGoogleToNewPosition()
     _notifyObservers(EVENTS.GOOGLE_JUMPED, {
