@@ -6,11 +6,16 @@ const _state = {
     settings:{
         googleJumpInterval:3000,
         gridSize:{
-            rowsCount:2,
-            columnCount:2
+            rowsCount:5,
+            columnCount:5
         },
-        pointsToLose:3,
-        pointsToWin:3,
+        pointsToLose:5,
+        pointsToWin:5,
+        optionData: [
+            { label: 'Grid size', value: ['4x4', '5x5', '6x6', '8x8'] },
+            { label: 'Points to win', value: [5, 10, 15, 20] },
+            { label: 'Points to lose', value: [5, 10, 15, 20] },
+        ],
     },
     positins:{
         google:{
@@ -282,3 +287,25 @@ export async function getPlayersPosition(playerNumber) {
     return {..._state.positins.players[playerIndex]}
 }
 
+export function getOptionData(params) {
+    return _state.settings.optionData
+}
+
+export function changeSettingsGrid (e) {
+    const selectValue = e.target.value;
+    const [newWidthGridSize, newHeightGridSize] = selectValue.split('x').map(Number);
+    _state.settings.gridSize.width = newWidthGridSize;
+    _state.settings.gridSize.height = newHeightGridSize;
+
+}
+export function changePointsWin (e) {
+    
+    const selectValue = e.target.value;
+    _state.settings.pointsToWin = Number(selectValue);
+    console.log(_state.settings.pointsToWin)
+
+}
+export function changePointsLose (e) {
+    const selectValue = e.target.value;
+    _state.settings.pointsToLose = Number(selectValue)
+}

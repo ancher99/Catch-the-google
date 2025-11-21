@@ -10,7 +10,8 @@ import { WinComponent } from "./Win/Win.component.js";
 
 export function AppComponent(){
     const localState = {prevGameStatus:null, cleanupFunction:[]}
-    const element = document.createElement('div');
+    const element = document.createElement('section');
+    element.classList.add('container')
 
     const audioComponent = AudioComponent()
 

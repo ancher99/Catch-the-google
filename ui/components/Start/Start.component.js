@@ -1,9 +1,12 @@
 import { start } from "../../../core/state-manager.js";
 
-export function StartComponent(){
-    const element = document.createElement('div');
-    const button = document.createElement('button')
 
+
+export function StartComponent(){
+    const element = document.createElement('button');
+    element.classList.add('button')
+    element.classList.add('main-button')
+    element.innerText='START GAME'
     render(element);
 
     return {element};
@@ -11,10 +14,8 @@ export function StartComponent(){
 
 
 async function render(element) {
-    const button = document.createElement('button')
-    button.append('StartGame')
-    button.addEventListener('click', () =>{
+    
+    element.addEventListener('click', () =>{
         start()
     })
-    element.append(button)
 }

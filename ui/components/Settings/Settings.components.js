@@ -1,7 +1,20 @@
+import { getOptionData } from "../../../core/state-manager.js";
+import { Line } from "./Line/Line.js";
+import { SwitchButton } from "./SwitchButton/SwitchButton.js";
 
 
 export function SettingsComponent(){
     const element = document.createElement('div');
+    element.classList.add('top-items')
+
+    const settings =  getOptionData()
+
+    settings.forEach((item, index) => {
+        element.append(
+            Line(item.label, item.value, index)
+        
+        )
+    })
 
     render(element)
 
@@ -9,5 +22,5 @@ export function SettingsComponent(){
 }
 
 async function render(element) {
-    element.append(`Setting will be here`)
+    element.append(SwitchButton())
 }
