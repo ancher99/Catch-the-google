@@ -4,7 +4,7 @@ import { EVENTS, GAME_STATUSES, MOVING_DIRECTIONS } from "./constans.js"
 const _state = {
     gameStatus:GAME_STATUSES.SETTINGS,
     settings:{
-        googleJumpInterval:300000,
+        googleJumpInterval:2000,
         gridSize:{
             rowsCount:4,
             columnCount:4
