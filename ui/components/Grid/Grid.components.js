@@ -23,7 +23,7 @@ export function GridComponent(){
     document.addEventListener('keyup', keyupObserver)
 
     const element = document.createElement('table');
-    element.classList.add('grid')
+    element.classList.add('table')
 
    render(element, localState)
 
@@ -35,7 +35,7 @@ export function GridComponent(){
 }
 
 async function render(element,localState) {
-
+    const elementTBody = document.createElement('tbody')
     localState.cleanupFunctions.forEach(cf=>cf())
     localState.cleanupFunctions=[]
     element.innerHTML='';
@@ -51,8 +51,8 @@ async function render(element,localState) {
             localState.cleanupFunctions.push(cellComponent.cleanup)
             rowElement.append(cellComponent.element)
         }
-        element.append(rowElement) 
+        elementTBody.append(rowElement) 
     }
 
-    
+    element.append(elementTBody)
 }

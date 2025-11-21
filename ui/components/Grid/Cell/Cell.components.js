@@ -6,6 +6,7 @@ import { PlayerComponent } from "../../Common/Player/Player.component.js"
 export function CellComponent (x,y){
     
     const element=document.createElement('td')
+    element.classList.add('cell')
     const localState = { rendering : false }
     let observer = (e) =>{
         if([EVENTS.GOOGLE_JUMPED, EVENTS.PLAYER1_MOVED, EVENTS.PLAYER2_MOVED].every(name=>name !== e.name)) return

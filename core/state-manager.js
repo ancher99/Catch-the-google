@@ -294,8 +294,8 @@ export function getOptionData(params) {
 export function changeSettingsGrid (e) {
     const selectValue = e.target.value;
     const [newWidthGridSize, newHeightGridSize] = selectValue.split('x').map(Number);
-    _state.settings.gridSize.width = newWidthGridSize;
-    _state.settings.gridSize.height = newHeightGridSize;
+    _state.settings.gridSize.columnCount = newWidthGridSize;
+    _state.settings.gridSize.rowsCount = newHeightGridSize;
 
 }
 export function changePointsWin (e) {
