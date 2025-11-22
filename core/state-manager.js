@@ -21,7 +21,7 @@ const _state = {
         google:{
             x:2, y:1
         },
-        players:[{x:1, y:2},
+        players:[{x:1, y:1},
                  {x:3, y:3}
         ]
     },
